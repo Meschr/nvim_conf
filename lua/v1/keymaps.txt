@@ -1,0 +1,63 @@
+-- interesting stuff --
+Space + nh = Clear search highlights
+:w save 
+:e create file
+:Explor open File explorer
+:source % some kind of reload
+
+-- file explorer --
+Space + ee = Toggle File Explorer
+Space + ef = Toggle File Explorer on current file
+Space + ec = Collapse File Explorer
+Space + er = Refresh File Explorer
+
+-- Split --
+Space + sv = Split Window vertically
+Space + sh = Split Window horizontally
+Space + se = Make splits equal size
+Space + sx = Close current split 
+
+-- Move around split (plugin tmux-navigator) --
+Strg + h = Move to the split on the left
+Strg + l = Move to the split on the right
+Strg + j = Move to the split on the bottom 
+Strg + k = Move to the split on the top
+
+-- Tab --
+Space + to = Open new tab
+Space + tx = Close current tab
+Space + tn = Go to next tab
+Space + tp = Go to previous tab
+Space + tf = Open current buffer in new tab
+
+-- incerement/decrement numbers --
+Space + + = Increment Number (in Normal mode)
+Space + - = Decrement Number (in Normal mode)
+
+-- fuzzy finder (plugin telescope) --
+Space + ff = Find Files in cwd
+Space + fr = Find recent files
+Space + fs = Find string in cwd
+Space + fc = Find string under curser
+Space + ft = Find Todos
+
+-- auto-sessions --
+Space + wr = Restore session for cwd
+Space + ws = Save session for auto session root dir
+
+-- split maximizer --
+Space + sm = Maximize/Minimize a split
+
+todo plugin  trouble--
+Space + xw = Trouble diagnostics tool
+Space + xd = Trouble diagnostics toggle filter
+Space + xq = Trouble quickfix toggle
+Space + xl = Trouble loclist toggle
+Space + xt = Trouble todo toggle
+
+
+
+
+ADD Python stuff
+Space + R  = Run Python
+Space + MP

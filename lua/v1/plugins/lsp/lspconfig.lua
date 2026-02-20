@@ -104,61 +104,63 @@ return {
 			float = { border = border },
 		})
 
-		mason_lspconfig.setup_handlers({
-			-- default handler for installed servers
-			function(server_name)
-				lspconfig[server_name].setup({
-					on_attach = function(client, bufnr)
-						print(server_name .. " attached")
-					end,
-					capabilities = capabilities,
-				})
-			end,
+		mason_lspconfig.setup({
+			handlers = {
+				-- default handler for installed servers
+				function(server_name)
+					lspconfig[server_name].setup({
+						on_attach = function(client, bufnr)
+							print(server_name .. " attached")
+						end,
+						capabilities = capabilities,
+					})
+				end,
 
-			--configure pyright server
-			["pyright"] = function()
-				lspconfig.pyright.setup({
-					settings = {
-						python = {
-							analysis = {
-								typeCheckingMode = "basic", -- or "strict", "off"
+				--configure pyright server
+				["pyright"] = function()
+					lspconfig.pyright.setup({
+						settings = {
+							python = {
+								analysis = {
+									typeCheckingMode = "basic", -- or "strict", "off"
+								},
 							},
 						},
-					},
-					handlers = handlers,
-				})
-			end,
+						handlers = handlers,
+					})
+				end,
 
-			["lua_ls"] = function()
-				-- configure lua server (with special settings)
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							-- make the language server recognize "vim" global
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
+				["lua_ls"] = function()
+					-- configure lua server (with special settings)
+					lspconfig["lua_ls"].setup({
+						capabilities = capabilities,
+						settings = {
+							Lua = {
+								-- make the language server recognize "vim" global
+								diagnostics = {
+									globals = { "vim" },
+								},
+								completion = {
+									callSnippet = "Replace",
+								},
 							},
 						},
-					},
-					handlers = handlers,
-				})
-			end,
+						handlers = handlers,
+					})
+				end,
 
-			["clangd"] = function()
-				-- configure clangd ----
-				lspconfig.clangd.setup({
-					settings = {
-						clangd = {
-							-- Clangd specific settings
+				["clangd"] = function()
+					-- configure clangd ----
+					lspconfig.clangd.setup({
+						settings = {
+							clangd = {
+								-- Clangd specific settings
+							},
 						},
-					},
-					handlers = handlers,
-				})
-			end,
+						handlers = handlers,
+					})
+				end,
+			},
 		})
 	end,
 }

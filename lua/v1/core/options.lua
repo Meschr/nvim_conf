@@ -4,7 +4,7 @@ local opt = vim.opt
 opt.relativenumber = true
 opt.number = true
 
--- tabs and indentation 
+-- tabs and indentation
 opt.tabstop = 2 -- 2 spaces for tabs
 opt.shiftwidth = 2 -- 2 spaces for indent with
 opt.expandtab = true -- expand tab to spaces
@@ -17,7 +17,6 @@ opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
 
 opt.cursorline = true
-
 
 --termgui colors
 opt.termguicolors = true

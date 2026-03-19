@@ -31,7 +31,7 @@ return {
 				"pyright",
 				"clangd",
 			},
-			automatic_installation = true,
+			--automatic_installation = true,
 		})
 
 		mason_tool_installer.setup({

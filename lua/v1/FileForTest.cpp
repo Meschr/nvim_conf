@@ -6,9 +6,7 @@
 // FIX:
 // HACK:
 
-void print(const char *name, int value) {
-  printf("%s = %d\n", name, value);
-}
+void print(const char *name, int value) { printf("%s = %d\n", name, value); }
 
 int main(void) {
   int cnt = 13;

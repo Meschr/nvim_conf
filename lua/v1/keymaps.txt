@@ -127,6 +127,18 @@ Space + xq = Trouble quickfix toggle
 Space + xl = Trouble loclist toggle
 Space + xt = Trouble todo toggle
 
+-- Claude Code (plugin claudecode.nvim) --
+Space + ac = Toggle Claude
+Space + af = Focus Claude window
+Space + ar = Resume an old Claude conversation
+Space + aC = Continue last Claude conversation
+Space + am = Select Claude model
+Space + ab = Add current buffer to Claude context
+Space + as = Send selection to Claude (Visual mode) / add file (in nvim-tree)
+Space + aa = Accept Claude diff
+Space + ad = Deny Claude diff
+/ide = (inside Claude) check connection to nvim
+
 -- Python --
 Space + r = Save and run current file with python3
 Space + rr = Open IPython in a vertical split

@@ -15,7 +15,8 @@ return {
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 			group = lint_augroup,
 			callback = function()
-				lint.try_lint()
+				-- don't spam errors on every buffer switch if a linter isn't installed (yet)
+				lint.try_lint(nil, { ignore_errors = true })
 			end,
 		})
 

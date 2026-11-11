@@ -1,11 +1,16 @@
+Leader key = Space
+
 -- interesting stuff --
+jk = Exit insert mode (in Insert mode)
 Space + nh = Clear search highlights
-:w save 
+:w save
 :e create file
 :Explor open File explorer
 :source % some kind of reload
+:Lazy = Plugin manager
+:Mason = LSP / formatter / linter installer
 
--- file explorer --
+-- file explorer (plugin nvim-tree) --
 Space + ee = Toggle File Explorer
 Space + ef = Toggle File Explorer on current file
 Space + ec = Collapse File Explorer
@@ -15,13 +20,16 @@ Space + er = Refresh File Explorer
 Space + sv = Split Window vertically
 Space + sh = Split Window horizontally
 Space + se = Make splits equal size
-Space + sx = Close current split 
+Space + sx = Close current split
 
 -- Move around split (plugin tmux-navigator) --
 Strg + h = Move to the split on the left
 Strg + l = Move to the split on the right
-Strg + j = Move to the split on the bottom 
+Strg + j = Move to the split on the bottom
 Strg + k = Move to the split on the top
+
+-- split maximizer --
+Space + sm = Maximize/Minimize a split
 
 -- Tab --
 Space + to = Open new tab
@@ -40,24 +48,90 @@ Space + fr = Find recent files
 Space + fs = Find string in cwd
 Space + fc = Find string under curser
 Space + ft = Find Todos
+inside telescope:
+Strg + j = Next result
+Strg + k = Previous result
+Strg + q = Send selected to quickfix list
 
 -- auto-sessions --
 Space + wr = Restore session for cwd
 Space + ws = Save session for auto session root dir
 
--- split maximizer --
-Space + sm = Maximize/Minimize a split
+-- LSP (only when a language server is attached) --
+gR = Show references (telescope)
+gD = Go to declaration
+gd = Show definitions (telescope)
+gi = Show implementations (telescope)
+gt = Show type definitions (telescope)
+K = Show documentation for what is under cursor
+Space + ca = Code actions (Normal + Visual mode)
+Space + rn = Smart rename
+Space + D = Show diagnostics for file
+Space + d = Show diagnostics for line
+[d = Previous diagnostic
+]d = Next diagnostic
+Space + rs = Restart LSP
 
-todo plugin  trouble--
+-- autocompletion (plugin nvim-cmp, in Insert mode) --
+Strg + j = Next suggestion
+Strg + k = Previous suggestion
+Strg + Space = Show completion suggestions
+Strg + e = Close completion window
+Strg + b = Scroll docs up
+Strg + f = Scroll docs down
+Enter = Confirm selected suggestion
+
+-- formatting & linting (plugins conform / nvim-lint) --
+Space + mp = Format file (or selected range in Visual mode)
+Space + l = Trigger linting for current file
+
+-- comments (plugin Comment.nvim) --
+gcc = Toggle comment for line
+gc + motion = Toggle comment (e.g. gcap = paragraph), gc in Visual mode
+gbc = Toggle block comment
+
+-- substitute (plugin substitute.nvim) --
+s + motion = Substitute with motion (e.g. siw = replace word with yanked text)
+ss = Substitute line
+S = Substitute to end of line
+s = Substitute selection (in Visual mode)
+
+-- treesitter selection --
+Strg + Space = Start selection / grow selection to next node
+Backspace = Shrink selection (while selecting)
+
+-- git (plugins gitsigns / lazygit) --
+Space + lg = Open LazyGit
+]h = Next hunk
+[h = Previous hunk
+Space + hs = Stage hunk (also in Visual mode)
+Space + hr = Reset hunk (also in Visual mode)
+Space + hS = Stage buffer
+Space + hR = Reset buffer
+Space + hu = Undo stage hunk
+Space + hp = Preview hunk
+Space + hb = Blame line
+Space + hB = Toggle line blame
+Space + hd = Diff this
+Space + hD = Diff this ~
+ih = Select hunk (text object, e.g. dih / vih)
+
+-- todo comments --
+]t = Next todo comment
+[t = Previous todo comment
+
+-- trouble --
 Space + xw = Trouble diagnostics tool
 Space + xd = Trouble diagnostics toggle filter
 Space + xq = Trouble quickfix toggle
 Space + xl = Trouble loclist toggle
 Space + xt = Trouble todo toggle
 
+-- Python --
+Space + r = Save and run current file with python3
+Space + rr = Open IPython in a vertical split
+Space + rt = Save and run current file in IPython (vertical split)
 
-
-
-ADD Python stuff
-Space + R  = Run Python
-Space + MP
+-- start screen (plugin alpha) --
+e = New file
+q = Quit

@@ -7,16 +7,22 @@ return {
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		-- import lspconfig plugin
-		local lspconfig = require("lspconfig")
-
-		-- import mason_lspconfig plugin
-		local mason_lspconfig = require("mason-lspconfig")
-
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 		local keymap = vim.keymap -- for conciseness
+
+		-- Specify how the border looks like
+		local border = {
+			{ "┌", "FloatBorder" },
+			{ "─", "FloatBorder" },
+			{ "┐", "FloatBorder" },
+			{ "│", "FloatBorder" },
+			{ "┘", "FloatBorder" },
+			{ "─", "FloatBorder" },
+			{ "└", "FloatBorder" },
+			{ "│", "FloatBorder" },
+		}
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -60,15 +66,14 @@ return {
 				keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
 				opts.desc = "Show documentation for what is under cursor"
-				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+				keymap.set("n", "K", function()
+					vim.lsp.buf.hover({ border = border })
+				end, opts) -- show documentation for what is under cursor
 
 				opts.desc = "Restart LSP"
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 			end,
 		})
-
-		-- used to enable autocompletion (assign to every lsp server config)
-		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
 		-- (not in youtube nvim video)
@@ -78,24 +83,6 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-		-- Specify how the border looks like
-		local border = {
-			{ "┌", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "┐", "FloatBorder" },
-			{ "│", "FloatBorder" },
-			{ "┘", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "└", "FloatBorder" },
-			{ "│", "FloatBorder" },
-		}
-
-		-- Add the border on hover and on signature help popup window
-		local handlers = {
-			["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-			["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-		}
-
 		-- Add border to the diagnostic popup window
 		vim.diagnostic.config({
 			virtual_text = {
@@ -104,62 +91,33 @@ return {
 			float = { border = border },
 		})
 
-		mason_lspconfig.setup({
-			handlers = {
-				-- default handler for installed servers
-				function(server_name)
-					lspconfig[server_name].setup({
-						on_attach = function(client, bufnr)
-							print(server_name .. " attached")
-						end,
-						capabilities = capabilities,
-					})
-				end,
+		-- capabilities for every server (enables nvim-cmp completion);
+		-- mason-lspconfig enables the installed servers automatically
+		vim.lsp.config("*", {
+			capabilities = cmp_nvim_lsp.default_capabilities(),
+		})
 
-				--configure pyright server
-				["pyright"] = function()
-					lspconfig.pyright.setup({
-						settings = {
-							python = {
-								analysis = {
-									typeCheckingMode = "basic", -- or "strict", "off"
-								},
-							},
-						},
-						handlers = handlers,
-					})
-				end,
+		vim.lsp.config("pyright", {
+			settings = {
+				python = {
+					analysis = {
+						typeCheckingMode = "basic", -- or "strict", "off"
+					},
+				},
+			},
+		})
 
-				["lua_ls"] = function()
-					-- configure lua server (with special settings)
-					lspconfig["lua_ls"].setup({
-						capabilities = capabilities,
-						settings = {
-							Lua = {
-								-- make the language server recognize "vim" global
-								diagnostics = {
-									globals = { "vim" },
-								},
-								completion = {
-									callSnippet = "Replace",
-								},
-							},
-						},
-						handlers = handlers,
-					})
-				end,
-
-				["clangd"] = function()
-					-- configure clangd ----
-					lspconfig.clangd.setup({
-						settings = {
-							clangd = {
-								-- Clangd specific settings
-							},
-						},
-						handlers = handlers,
-					})
-				end,
+		vim.lsp.config("lua_ls", {
+			settings = {
+				Lua = {
+					-- make the language server recognize "vim" global
+					diagnostics = {
+						globals = { "vim" },
+					},
+					completion = {
+						callSnippet = "Replace",
+					},
+				},
 			},
 		})
 	end,

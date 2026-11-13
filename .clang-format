@@ -2,7 +2,7 @@
 BasedOnStyle: LLVM
 BreakBeforeBraces: Allman
 IndentWidth: 4
-AllowShortFunctionsOnASingleLine: None
+AllowShortFunctionsOnASingleLine: Empty  # keep empty bodies as `Foo() {}`
 AllowShortBlocksOnASingleLine: Never
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false

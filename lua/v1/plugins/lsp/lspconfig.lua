@@ -107,6 +107,15 @@ return {
 			},
 		})
 
+		vim.lsp.config("clangd", {
+			cmd = {
+				"clangd",
+				-- let clangd ask cross compilers (ESP-IDF, STM32) for their system headers,
+				-- otherwise std::string etc. can't be resolved in embedded projects
+				"--query-driver=**/xtensa-esp*-elf-g*,**/riscv32-esp-elf-g*,**/arm-none-eabi-g*",
+			},
+		})
+
 		vim.lsp.config("lua_ls", {
 			settings = {
 				Lua = {

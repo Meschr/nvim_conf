@@ -20,6 +20,20 @@ return { "stevearc/conform.nvim",
         graphql = { "prettier" },
         lua = { "stylua" },
         python = { "isort", "black" },
+        c = { "clang_format" },
+        cpp = { "clang_format" },
+      },
+      formatters = {
+        clang_format = {
+          -- use the project's .clang-format if there is one, otherwise the Allman style from this config
+          prepend_args = function(_, ctx)
+            local project_style = vim.fs.find({ ".clang-format", "_clang-format" }, { upward = true, path = ctx.dirname })[1]
+            if project_style then
+              return {}
+            end
+            return { "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format" }
+          end,
+        },
       },
       format_on_save = {
         lsp_fallback = true,

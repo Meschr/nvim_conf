@@ -1,0 +1,8 @@
+# Default C/C++ style, used by conform when a project has no .clang-format of its own
+BasedOnStyle: LLVM
+BreakBeforeBraces: Allman
+IndentWidth: 4
+AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false

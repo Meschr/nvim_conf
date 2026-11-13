@@ -14,6 +14,7 @@ My Neovim config, managed with [lazy.nvim](https://github.com/folke/lazy.nvim).
 | node + npm | LSP servers like pyright, prettier |
 | python3 + venv | Python-based mason packages |
 | [lazygit](https://github.com/jesseduffield/lazygit) | lazygit.nvim |
+| [delta](https://github.com/dandavison/delta) | nicer diffs in lazygit (config written to `~/.config/lazygit/config.yml`) |
 | xclip (X11) or wl-clipboard (Wayland) | system clipboard |
 | **MesloLGS Nerd Font** set as terminal font | icons in nvim-tree, lualine, bufferline, … |
 
@@ -26,7 +27,7 @@ git clone git@github.com:<username>/nvim_conf.git ~/.config/nvim
 ~/.config/nvim/setup.sh
 ```
 
-The script installs the packages above, bob + Neovim stable, lazygit, the tree-sitter CLI and
+The script installs the packages above, bob + Neovim stable, lazygit + delta, the tree-sitter CLI and
 the MesloLGS Nerd Font, puts bob's `nvim-bin` on your `PATH` and syncs the plugins.
 It can be re-run safely. Use another Neovim version with `NVIM_VERSION=v0.11.4 ./setup.sh`.
 

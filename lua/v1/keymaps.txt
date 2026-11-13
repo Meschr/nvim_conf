@@ -102,6 +102,12 @@ Backspace = Shrink selection (while selecting)
 
 -- git (plugins gitsigns / lazygit) --
 Space + lg = Open LazyGit
+Space + gd = Diff all changes side by side (diffview)
+Space + gh = History of current file (diffview)
+Space + gH = History of whole repo (diffview)
+Space + gq = Close diffview
+in diffview: Tab / Shift + Tab = next / previous file, ]c / [c = next / previous change
+in lazygit: | = switch diff view (delta / delta side-by-side / plain)
 ]h = Next hunk
 [h = Previous hunk
 Space + hs = Stage hunk (also in Visual mode)

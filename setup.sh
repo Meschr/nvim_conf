@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Sets up everything this Neovim config needs on Ubuntu/Debian (apt) or Arch (pacman):
-#   system packages, bob + Neovim stable, lazygit, tree-sitter CLI, MesloLGS Nerd Font.
+#   system packages, bob + Neovim stable, lazygit + delta, tree-sitter CLI, MesloLGS Nerd Font.
 # Safe to re-run: already installed things are skipped.
 set -euo pipefail
 
@@ -67,6 +67,40 @@ else
 		"https://github.com/jesseduffield/lazygit/releases/download/v${LG_VERSION}/lazygit_${LG_VERSION}_linux_${ARCH}.tar.gz"
 	tar -xzf "$TMP/lazygit.tar.gz" -C "$TMP" lazygit
 	install -m 755 "$TMP/lazygit" "$BIN_DIR/lazygit"
+fi
+
+# --- delta (nicer diffs in lazygit / git) ------------------------------------
+if command -v delta >/dev/null; then
+	skip "delta already installed ($(delta --version))"
+else
+	info "Installing delta"
+	DELTA_VERSION=$(curl -fsSL https://api.github.com/repos/dandavison/delta/releases/latest |
+		grep -Po '"tag_name": *"\K[^"]*')
+	DELTA_ARCH=$([ "$ARCH" = arm64 ] && echo aarch64 || echo x86_64)
+	DELTA_NAME="delta-${DELTA_VERSION}-${DELTA_ARCH}-unknown-linux-gnu"
+	curl -fsSL -o "$TMP/delta.tar.gz" \
+		"https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/${DELTA_NAME}.tar.gz"
+	tar -xzf "$TMP/delta.tar.gz" -C "$TMP"
+	install -m 755 "$TMP/${DELTA_NAME}/delta" "$BIN_DIR/delta"
+fi
+
+LG_CONFIG="$HOME/.config/lazygit/config.yml"
+if [ -s "$LG_CONFIG" ]; then
+	skip "lazygit config exists, not touching it"
+else
+	info "Writing lazygit config (delta as diff renderer)"
+	mkdir -p "$(dirname "$LG_CONFIG")"
+	cat >"$LG_CONFIG" <<'EOF'
+git:
+  # cycle between them with | inside lazygit
+  diffRenderers:
+    - command: delta --{{colorScheme}} --paging=never {{if gt .width 160}}--side-by-side{{end}}
+      name: delta
+    - command: delta --{{colorScheme}} --paging=never --side-by-side
+      name: delta side-by-side
+    - type: rawGit
+      name: default
+EOF
 fi
 
 # --- tree-sitter CLI (needed by nvim-treesitter main branch) -----------------

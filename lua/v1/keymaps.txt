@@ -140,6 +140,14 @@ Space + aa = Accept Claude diff
 Space + ad = Deny Claude diff
 /ide = (inside Claude) check connection to nvim
 
+-- ESP-IDF (runs idf.py in a terminal at the bottom, from the project root) --
+Space + ib = Build
+Space + if = Flash
+Space + im = Monitor (exit monitor with Strg + ])
+Space + ia = Build, flash & monitor
+Space + ic = menuconfig
+Space + ix = fullclean
+
 -- Python --
 Space + r = Save and run current file with python3
 Space + rr = Open IPython in a vertical split
